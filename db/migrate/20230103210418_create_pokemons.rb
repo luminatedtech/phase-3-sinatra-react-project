@@ -6,6 +6,7 @@ class CreatePokemons < ActiveRecord::Migration[6.1]
       t.integer :type1_id
       t.integer :type2_id
       t.integer :level
+      t.string :avatar_url
     end 
   end
 end
