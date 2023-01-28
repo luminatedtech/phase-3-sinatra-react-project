@@ -2,24 +2,38 @@ class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
   # Add your routes here
-  
-
-  
-
-  get "/trainers" do 
-    trainers = Trainer.all
-    trainers.to_json(include: :pokemons)
+  get '/trainers' do 
+    trainer = Trainer.all 
+    trainer.to_json(include: :pokemons)
   end 
-  get "/trainers/pokemons/:trainer_id" do
-    pokemon=Pokemon.where("trainer_id=?",params[:trainer_id])
-    pokemon.to_json
+
+  delete '/trainers/:id' do
+    trainer = Trainer.find(params[:id])
+    trainer.destroy
+    trainer.to_json
+  end 
+
+  post '/trainers' do 
+    # trainer=Trainer.create(
+    #   name: params[:name],
+    #   region: params[:region],
+      
+    # )
+    trainer = Trainer.create(
+      params
+    )
     
+    trainer.to_json(include: :pokemons)
   end 
-  delete "/trainers/:pokemon_id" do
-    pokemon=Pokemon.find(params[:id])
-    pokemon.destroy
-    pokemon.to_json
-  end 
+  
+
+
+
+
+  
+
+  
+
 
 
 end
