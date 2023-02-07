@@ -26,7 +26,13 @@ class ApplicationController < Sinatra::Base
     trainer.to_json(include: :pokemons)
   end 
   
-
+  patch '/trainers/:id' do 
+    trainer = Trainer.find(params[:id])
+    trainer.update(
+      likes: params[:likes]
+    )
+    trainer.to_json
+  end 
 
 
 
